@@ -11,8 +11,10 @@ const BaseAuthStrategy = require('./BaseAuthStrategy');
  * @param {string} options.dataPath - Change the default path for saving session files, default is: "./.wwebjs_auth/" 
 */
 class LocalAuth extends BaseAuthStrategy {
+
     constructor({ clientId, dataPath }={}) {
         super();
+        
 
         const idRegex = /^[-_\w]+$/i;
         if(clientId && !idRegex.test(clientId)) {
@@ -46,6 +48,11 @@ class LocalAuth extends BaseAuthStrategy {
         if (this.userDataDir) {
             return (fs.rmSync ? fs.rmSync : fs.rmdirSync).call(this, this.userDataDir, { recursive: true, force: true });
         }
+    }
+
+    async afterAuthReady() {
+        const page = this.client.pupPage;
+        await page.deleteCookie({name:'wa_build', domain:'.web.whatsapp.com', path:'/'});
     }
 
 }
