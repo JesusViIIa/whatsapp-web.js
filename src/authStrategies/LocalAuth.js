@@ -50,11 +50,11 @@ class LocalAuth extends BaseAuthStrategy {
         }
     }
 
-    async afterAuthReady() {
+/*     async afterAuthReady() {
         const page = this.client.pupPage;
         await page.deleteCookie({name:'wa_build', domain:'.web.whatsapp.com', path:'/'});
     }
-
+ */
 }
 
 module.exports = LocalAuth;
