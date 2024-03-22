@@ -242,6 +242,9 @@ class Client extends EventEmitter {
         if (needAuthentication) {
             const { failed, failureEventPayload, restart } =
                 await this.authStrategy.onAuthenticationNeeded();
+                console.log("failed", failed);
+                console.log("failureEventPayload", failureEventPayload);
+                console.log("restart", restart);
             if (failed) {
                 /**
                  * Emitted when there has been an error while trying to restore an existing session
