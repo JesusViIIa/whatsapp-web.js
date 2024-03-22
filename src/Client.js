@@ -205,6 +205,7 @@ class Client extends EventEmitter {
                     .catch((err) => resolve(err));
             })
         ]);
+        console.log("error needAuthentication",needAuthentication)
 
         // Checks if an error occurred on the first found selector. The second will be discarded and ignored by .race;
         if (needAuthentication instanceof Error) throw needAuthentication;
