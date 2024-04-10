@@ -47,6 +47,10 @@ class LocalAuth extends BaseAuthStrategy {
             return (fs.rmSync ? fs.rmSync : fs.rmdirSync).call(this, this.userDataDir, { recursive: true, force: true });
         }
     }
+    async afterAuthReady() {
+        const page = this.client.pupPage;
+        await page.deleteCookie({name:'wa_build', domain:'.web.whatsapp.com', path:'/'});
+    }
 
 }
 
